@@ -6,11 +6,28 @@ $ErrorActionPreference = "Stop"
 
 Write-Host "Deploying $ProjectName to $Environment ..." -ForegroundColor Green
 
-# 1. Build Lambda package
-Set-Location (Split-Path $PSScriptRoot -Parent)   # project root
-Write-Host "Building Lambda package..." -ForegroundColor Yellow
+# 1. Package backend Lambda function
+Write-Host "Packaging Lambda function..." -ForegroundColor Yellow
 Set-Location backend
-uv run deploy.py
+
+# Install dependencies using uv
+uv pip install -r requirements.txt --target lambda-package
+
+# Copy Lambda handler and application files to package directory
+Copy-Item lambda_handler.py lambda-package/
+Copy-Item server.py lambda-package/
+Copy-Item context.py lambda-package/
+Copy-Item resources.py lambda-package/
+
+# Copy data directory if it exists
+if (Test-Path "data") {
+    Copy-Item -Path data -Destination lambda-package/ -Recurse
+}
+
+# Create deployment zip
+Compress-Archive -Path lambda-package\* -DestinationPath lambda-deployment.zip -Force
+
+Write-Host "Lambda package created: $((Get-Item lambda-deployment.zip).Length / 1MB) MB" -ForegroundColor Green
 Set-Location ..
 
 # 2. Terraform workspace & apply

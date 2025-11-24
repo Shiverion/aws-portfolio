@@ -22,8 +22,16 @@ cd backend
 # Install dependencies using uv
 uv pip install -r requirements.txt --target lambda-package
 
-# Copy Lambda handler to package directory
-cp lambda_function.py lambda-package/
+# Copy Lambda handler and application files to package directory
+cp lambda_handler.py lambda-package/
+cp server.py lambda-package/
+cp context.py lambda-package/
+cp resources.py lambda-package/
+
+# Copy data directory if it exists
+if [ -d "data" ]; then
+    cp -r data lambda-package/
+fi
 
 # Create deployment zip
 cd lambda-package
