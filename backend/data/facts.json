@@ -1,0 +1,71 @@
+{
+    "full_name": "Muhammad Iqbal Hilmy Izzulhaq",
+    "name": "Iqbal",
+    "current_role": "Autonomous AI Agent Engineer, NLP & RAG Specialist, Data Scientist",
+    "location": "Indonesia",
+    "email": "[miqbal.izzulhaq@gmail.com](mailto:miqbal.izzulhaq@gmail.com)",
+    "linkedin": "[https://www.linkedin.com/in/izzulhaq-iqbal/](https://www.linkedin.com/in/izzulhaq-iqbal/)",
+    "github": "[https://github.com/Shiverion](https://github.com/Shiverion)",
+    "portfolio": "[https://shiverion-github-io.vercel.app](https://shiverion-github-io.vercel.app)",
+    "medium": "[https://medium.com/@miqbal.izzulhaq](https://medium.com/@miqbal.izzulhaq)",
+    "specialties": [
+    "Agentic AI",
+    "RAG & NLP",
+    "Predictive Analytics",
+    "Multi-agent Systems",
+    "Data Visualization (Tableau, Power BI)",
+    "Machine Learning",
+    "Python & SQL",
+    "No-code AI Automation (Dify.AI, n8n)",
+    "Corporate AI Training & Mentorship"
+    ],
+    "years_experience": 3,
+    "education": [
+    {
+    "degree": "B.S. in Physics",
+    "institution": "University of Brawijaya",
+    "year": "2023"
+    },
+    {
+    "degree": "Data Analysis & Machine Learning",
+    "institution": "Purwadhika Digital Technology School",
+    "year": "2025"
+    }
+    ],
+    "experience": [
+    {
+    "role": "Mentor / Team Lead",
+    "organization": "RevoU",
+    "duration": "Aug 2025 – Present",
+    "details": [
+    "Led Generative AI programs for corporate clients including Bayan Resources, PT Jalin, AXA Mandiri.",
+    "Delivered hands-on AI workshops covering ChatGPT, Agent Mode, CustomGPT, and prompt engineering.",
+    "Implemented AI-driven solutions for business efficiency, process automation, and decision-making."
+    ]
+    },
+    {
+    "role": "Data Scientist Intern",
+    "organization": "House of Representatives, Republic of Indonesia (DPR RI)",
+    "duration": "April 2025 – October 2025",
+    "details": [
+    "Analyzed SUSENAS data to support policy recommendations using Python and dashboards.",
+    "Performed NLP on Mahkamah Konstitusi verdicts to identify legal trends.",
+    "Built RAG prototypes and no-code workflows for legal document search and summarization."
+    ]
+    }
+    ],
+    "key_projects": [
+    "Career Digital Twin (RAG Chatbot) representing skills to employers.",
+    "Trader Agent Simulator (OpenAI Agents SDK) using multiple LLM providers.",
+    "Indonesian Parliament Activity Chatbot (Langchain + SQL database).",
+    "Telco Churn Analysis (AllKNN) achieving 93.7% recall, saving $18.8K.",
+    "Airbnb Data Analysis optimizing pricing models, increasing revenue by 7.6% (฿3.9 million)."
+    ],
+    "certifications": [
+    "Agentic AI Engineering (Udemy, 2025)",
+    "Artificial Intelligence (Kominfo, 2023)",
+    "Metaverse Engineering (Kominfo, 2023)",
+    "Data Science & AI (DQLab, 2020–2022)"
+    ]
+    }
+    
