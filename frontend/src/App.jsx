@@ -295,19 +295,17 @@ const Header = ({ currentPage, navigateTo }) => {
         navigateTo(page);
         setIsMobileMenuOpen(false);
       }}
-      className={`transition-all duration-300 ${
-        isMobile
+      className={`transition-all duration-300 ${isMobile
           ? 'block w-full text-left px-4 py-3 rounded-lg text-lg'
           : 'px-4 py-2 rounded-md text-sm font-medium'
-      } ${
-        currentPage === page
+        } ${currentPage === page
           ? (isMobile
-              ? 'bg-neon-blue/20 text-neon-cyan border border-neon-blue/50'
-              : 'bg-neon-blue/20 text-neon-cyan border border-neon-blue/50 shadow-neon-blue')
+            ? 'bg-neon-blue/20 text-neon-cyan border border-neon-blue/50'
+            : 'bg-neon-blue/20 text-neon-cyan border border-neon-blue/50 shadow-neon-blue')
           : (isMobile
-              ? 'text-gray-300 hover:bg-neon-blue/10 hover:text-neon-cyan hover:border hover:border-neon-blue/30'
-              : 'text-gray-300 hover:bg-neon-blue/10 hover:text-neon-cyan hover:border hover:border-neon-blue/30')
-      }`}
+            ? 'text-gray-300 hover:bg-neon-blue/10 hover:text-neon-cyan hover:border hover:border-neon-blue/30'
+            : 'text-gray-300 hover:bg-neon-blue/10 hover:text-neon-cyan hover:border hover:border-neon-blue/30')
+        }`}
     >
       {children}
     </motion.button>
@@ -1109,24 +1107,33 @@ const AgentChatModal = ({ closeModal }) => {
     setMessages(prev => [...prev, { role: 'user', text: message }]);
 
     try {
-      const response = await fetch('/api/askAgent', {
+      // Get API URL from environment or use the deployed API Gateway
+      const apiUrl = import.meta.env.VITE_API_URL || window.location.origin.replace(/\.cloudfront\.net$/, '') + '/api';
+
+      const response = await fetch(`${apiUrl}/api/chat/portfolio`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           message: message,
-          systemInstruction: AGENT_SYSTEM_PROMPT
+          session_id: sessionStorage.getItem('portfolio_session_id') || undefined
         }),
       });
 
       if (!response.ok) {
-        const errData = await response.json();
+        const errData = await response.json().catch(() => ({ error: `HTTP ${response.status}` }));
         throw new Error(errData.error || `Server error: ${response.status}`);
       }
 
       const data = await response.json();
-      const agentText = data.text;
+
+      // Save session ID for conversation continuity
+      if (data.session_id) {
+        sessionStorage.setItem('portfolio_session_id', data.session_id);
+      }
+
+      const agentText = data.response;
 
       if (agentText) {
         setMessages(prev => [...prev, { role: 'agent', text: agentText }]);
@@ -1211,11 +1218,10 @@ const AgentChatModal = ({ closeModal }) => {
                 )}
 
                 <div
-                  className={`max-w-[75%] rounded-2xl ${
-                    msg.role === 'user'
+                  className={`max-w-[75%] rounded-2xl ${msg.role === 'user'
                       ? 'bg-neon-blue/80 text-white rounded-br-none p-3 shadow-neon-blue'
                       : 'glass text-gray-200 rounded-bl-none border border-neon-cyan/30'
-                  }`}
+                    }`}
                 >
                   {msg.role === 'agent' ? (
                     <ReactMarkdown
