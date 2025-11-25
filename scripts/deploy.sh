@@ -81,10 +81,10 @@ echo "🎨 Building frontend..."
 cd frontend
 
 npm ci
-NEXT_PUBLIC_API_URL="$API_URL" npm run build
+VITE_API_URL="$API_URL" npm run build
 
 echo "📤 Deploying frontend to S3..."
-aws s3 sync out/ "s3://$FRONTEND_BUCKET/" --delete
+aws s3 sync dist/ "s3://$FRONTEND_BUCKET/" --delete
 
 cd ..
 
