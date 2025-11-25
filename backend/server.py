@@ -15,6 +15,9 @@ from context import prompt
 load_dotenv()
 
 app = FastAPI()
+# Include portfolio chatbot router
+from portfolio_router import router as portfolio_router
+app.include_router(portfolio_router)
 
 # Configure CORS
 origins = os.getenv("CORS_ORIGINS", "http://localhost:3000").split(",")
