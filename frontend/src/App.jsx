@@ -296,8 +296,8 @@ const Header = ({ currentPage, navigateTo }) => {
         setIsMobileMenuOpen(false);
       }}
       className={`transition-all duration-300 ${isMobile
-          ? 'block w-full text-left px-4 py-3 rounded-lg text-lg'
-          : 'px-4 py-2 rounded-md text-sm font-medium'
+        ? 'block w-full text-left px-4 py-3 rounded-lg text-lg'
+        : 'px-4 py-2 rounded-md text-sm font-medium'
         } ${currentPage === page
           ? (isMobile
             ? 'bg-neon-blue/20 text-neon-cyan border border-neon-blue/50'
@@ -1107,8 +1107,13 @@ const AgentChatModal = ({ closeModal }) => {
     setMessages(prev => [...prev, { role: 'user', text: message }]);
 
     try {
-      // Get API URL from environment or use the deployed API Gateway
-      const apiUrl = import.meta.env.VITE_API_URL || window.location.origin.replace(/\.cloudfront\.net$/, '') + '/api';
+      // Use API URL from build-time environment variable
+      // This is set during deployment by the deploy.sh/ps1 scripts
+      const apiUrl = import.meta.env.VITE_API_URL;
+
+      if (!apiUrl) {
+        throw new Error('API URL not configured. Please contact the site administrator.');
+      }
 
       const response = await fetch(`${apiUrl}/api/chat/portfolio`, {
         method: 'POST',
@@ -1219,8 +1224,8 @@ const AgentChatModal = ({ closeModal }) => {
 
                 <div
                   className={`max-w-[75%] rounded-2xl ${msg.role === 'user'
-                      ? 'bg-neon-blue/80 text-white rounded-br-none p-3 shadow-neon-blue'
-                      : 'glass text-gray-200 rounded-bl-none border border-neon-cyan/30'
+                    ? 'bg-neon-blue/80 text-white rounded-br-none p-3 shadow-neon-blue'
+                    : 'glass text-gray-200 rounded-bl-none border border-neon-cyan/30'
                     }`}
                 >
                   {msg.role === 'agent' ? (
